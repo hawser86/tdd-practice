@@ -7,22 +7,26 @@ export class BowlingGame {
 
     public getScore(): number {
         let score = 0;
-        let firstRollInFrame = true;
         let frameIndex = 0;
+        let rollIndex = 0;
 
-        for (let rollIndex = 0; rollIndex < this.rolls.length; rollIndex++) {
-            if (frameIndex === 10) {
-                break;
-            }
+        while (rollIndex < this.rolls.length) {
             const pinCount = this.rolls[rollIndex];
-            const spareBonus = !firstRollInFrame && (this.rolls[rollIndex - 1] + pinCount === 10) ? this.rolls[rollIndex + 1] : 0
-            const strikeBonus = firstRollInFrame && (pinCount === 10) ? this.rolls[rollIndex + 1] + this.rolls[rollIndex + 2] : 0;
 
-            score += pinCount + spareBonus + strikeBonus;
+            if (pinCount === 10) { // strike
+                score += 10 + this.rolls[rollIndex + 1] + this.rolls[rollIndex + 2];
+                rollIndex += 1;
+            } else if (pinCount + this.rolls[rollIndex + 1] === 10) { // spare
+                score += 10 + this.rolls[rollIndex + 2];
+                rollIndex += 2;
+            } else {
+                score += pinCount + (this.rolls[rollIndex + 1] ?? 0);
+                rollIndex += 2;
+            }
 
-            firstRollInFrame = pinCount === 10 ? true : !firstRollInFrame;
-            if (firstRollInFrame) {
-                frameIndex++;
+            frameIndex += 1;
+            if (frameIndex >= 10) {
+                break;
             }
         }
 
