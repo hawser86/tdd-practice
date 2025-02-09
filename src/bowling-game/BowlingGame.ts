@@ -1,11 +1,11 @@
 export class BowlingGame {
-    private score: number = 0;
+    private rolls: number[] = [];
 
     public roll(pins: number): void {
-        this.score += pins;
+        this.rolls.push(pins);
     }
 
     public getScore(): number {
-        return this.score;
+        return this.rolls.reduce((score, roll) => score + roll, 0);
     }
 }
