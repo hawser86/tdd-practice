@@ -17,4 +17,14 @@ describe('BowlingGame', () => {
         bowlingGame.roll(3);
         expect(bowlingGame.getScore()).toEqual(3);
     });
+
+    it('should calculate score as the sum of hit pins after multiple rolls', () => {
+        const bowlingGame = new BowlingGame();
+        bowlingGame.roll(2);
+        bowlingGame.roll(3);
+        bowlingGame.roll(8);
+        bowlingGame.roll(0);
+
+        expect(bowlingGame.getScore()).toEqual(13);
+    });
 });
