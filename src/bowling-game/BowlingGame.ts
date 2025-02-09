@@ -6,6 +6,9 @@ export class BowlingGame {
     }
 
     public getScore(): number {
-        return this.rolls.reduce((score, roll) => score + roll, 0);
+        return this.rolls.reduce((score, roll, rollIndex) => {
+            const bonus = this.rolls[rollIndex - 1] + roll === 10 ? this.rolls[rollIndex + 1] : 0
+            return score + roll + bonus;
+        }, 0);
     }
 }
