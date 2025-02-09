@@ -20,55 +20,45 @@ describe('BowlingGame', () => {
 
     it('should calculate score as the sum of hit pins after multiple rolls', () => {
         const bowlingGame = new BowlingGame();
-        bowlingGame.roll(2);
-        bowlingGame.roll(3);
-        bowlingGame.roll(8);
-        bowlingGame.roll(0);
+        rollFrame(bowlingGame, [2, 3]);
+        rollFrame(bowlingGame, [8, 0]);
 
         expect(bowlingGame.getScore()).toEqual(13);
     });
 
     it('should count the roll after a spare twice', () => {
         const bowlingGame = new BowlingGame();
-        bowlingGame.roll(7);
-        bowlingGame.roll(3);
-
-        bowlingGame.roll(8);
+        rollFrame(bowlingGame, [7, 3]);
+        rollFrame(bowlingGame, [8]);
 
         expect(bowlingGame.getScore()).toEqual(26);
     });
 
     it('should not consider two consecutive rolls a spare if they are in different frames', () => {
         const bowlingGame = new BowlingGame();
-
-        bowlingGame.roll(1);
-        bowlingGame.roll(7);
-
-        bowlingGame.roll(3);
-        bowlingGame.roll(5);
+        rollFrame(bowlingGame, [1, 7]);
+        rollFrame(bowlingGame, [3, 5]);
 
         expect(bowlingGame.getScore()).toEqual(16);
     });
 
     it('should count the 2 rolls after a strike twice', () => {
         const bowlingGame = new BowlingGame();
-        bowlingGame.roll(10);
-
-        bowlingGame.roll(3);
-        bowlingGame.roll(4);
+        rollFrame(bowlingGame, [10]);
+        rollFrame(bowlingGame, [3, 4]);
 
         expect(bowlingGame.getScore()).toEqual(24);
     });
 
     it('should consider hitting 10 pins on the 2nd roll of a frame a spare', () => {
         const bowlingGame = new BowlingGame();
-
-        bowlingGame.roll(0);
-        bowlingGame.roll(10);
-
-        bowlingGame.roll(3);
-        bowlingGame.roll(4);
+        rollFrame(bowlingGame, [0, 10]);
+        rollFrame(bowlingGame, [3, 4]);
 
         expect(bowlingGame.getScore()).toEqual(20);
     });
 });
+
+const rollFrame = (bowlingGame: BowlingGame, pinCounts: number[]) => {
+    pinCounts.forEach(pinCount => bowlingGame.roll(pinCount));
+};
