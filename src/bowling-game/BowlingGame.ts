@@ -11,7 +11,8 @@ export class BowlingGame {
         for (let rollIndex = 0; rollIndex < this.rolls.length; rollIndex++) {
             const pinCount = this.rolls[rollIndex];
             const bonus = (rollIndex % 2 !== 0) && (this.rolls[rollIndex - 1] + pinCount === 10) ? this.rolls[rollIndex + 1] : 0
-            score += pinCount + bonus;
+            const bonus2 = pinCount === 10 ? this.rolls[rollIndex + 1] + this.rolls[rollIndex + 2] : 0;
+            score += pinCount + bonus + bonus2;
         }
 
         return score;
