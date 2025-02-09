@@ -49,4 +49,14 @@ describe('BowlingGame', () => {
 
         expect(bowlingGame.getScore()).toEqual(16);
     });
+
+    it('should count the 2 rolls after a strike twice', () => {
+        const bowlingGame = new BowlingGame();
+        bowlingGame.roll(10);
+
+        bowlingGame.roll(3);
+        bowlingGame.roll(4);
+
+        expect(bowlingGame.getScore()).toEqual(24);
+    });
 });
