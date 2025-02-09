@@ -27,4 +27,14 @@ describe('BowlingGame', () => {
 
         expect(bowlingGame.getScore()).toEqual(13);
     });
+
+    it('should count the roll after a spare twice', () => {
+        const bowlingGame = new BowlingGame();
+        bowlingGame.roll(7);
+        bowlingGame.roll(3);
+
+        bowlingGame.roll(8);
+
+        expect(bowlingGame.getScore()).toEqual(26);
+    });
 });
