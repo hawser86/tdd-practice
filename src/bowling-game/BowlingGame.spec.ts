@@ -5,4 +5,10 @@ describe('BowlingGame', () => {
         const bowlingGame = new BowlingGame();
         expect(bowlingGame.getScore()).toEqual(0);
     });
+
+    it('should calculate score 0 when nothing is hit', () => {
+        const bowlingGame = new BowlingGame();
+        bowlingGame.roll(0);
+        expect(bowlingGame.getScore()).toEqual(0);
+    });
 });
