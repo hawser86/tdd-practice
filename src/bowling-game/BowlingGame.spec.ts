@@ -59,4 +59,16 @@ describe('BowlingGame', () => {
 
         expect(bowlingGame.getScore()).toEqual(24);
     });
+
+    it('should consider hitting 10 pins on the 2nd roll of a frame a spare', () => {
+        const bowlingGame = new BowlingGame();
+
+        bowlingGame.roll(0);
+        bowlingGame.roll(10);
+
+        bowlingGame.roll(3);
+        bowlingGame.roll(4);
+
+        expect(bowlingGame.getScore()).toEqual(20);
+    });
 });
