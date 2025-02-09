@@ -34,6 +34,13 @@ describe('BowlingGame', () => {
         expect(bowlingGame.getScore()).toEqual(26);
     });
 
+    it('should not add any bonus to the spare when the next roll is not rolled yet', () => {
+        const bowlingGame = new BowlingGame();
+        rollFrame(bowlingGame, [7, 3]);
+
+        expect(bowlingGame.getScore()).toEqual(10);
+    });
+
     it('should not consider two consecutive rolls a spare if they are in different frames', () => {
         const bowlingGame = new BowlingGame();
         rollFrame(bowlingGame, [1, 7]);
