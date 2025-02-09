@@ -11,4 +11,10 @@ describe('BowlingGame', () => {
         bowlingGame.roll(0);
         expect(bowlingGame.getScore()).toEqual(0);
     });
+
+    it('should calculate score based on hit pins after a single roll', () => {
+        const bowlingGame = new BowlingGame();
+        bowlingGame.roll(3);
+        expect(bowlingGame.getScore()).toEqual(3);
+    });
 });
