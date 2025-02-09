@@ -10,10 +10,10 @@ A strike is when the player knocks down all 10 pins on his first roll. The frame
 In the tenth frame a player who rolls a spare or strike is allowed to roll the extra balls to complete the frame. However no more than three balls can be rolled in tenth frame.
 
 ## Requirements
-Write a class `Game` that has two methods
+Write two methods:
 
-- `void roll(int)` is called each time the player rolls a ball. The argument is the number of pins knocked down.
-- `int score()` returns the total score for that game.
+- one is called each time the player rolls a ball. The argument is the number of pins knocked down.
+- the other returns the total score for that game.
 
 ## Source
 [Kata-Log](https://kata-log.rocks/bowling-game-kata)
