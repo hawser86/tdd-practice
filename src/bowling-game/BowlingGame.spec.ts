@@ -66,6 +66,16 @@ describe('BowlingGame', () => {
 
         expect(bowlingGame.getScore()).toEqual(34);
     });
+
+    it('should calculate score 300 for a perfect game', () => {
+        const bowlingGame = new BowlingGame();
+
+        for (let i = 0; i < 12; i++) {
+            bowlingGame.roll(10);
+        }
+
+        expect(bowlingGame.getScore()).toEqual(300);
+    });
 });
 
 const rollFrame = (bowlingGame: BowlingGame, pinCounts: number[]) => {
