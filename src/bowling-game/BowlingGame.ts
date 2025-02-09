@@ -11,26 +11,28 @@ export class BowlingGame {
         let rollIndex = 0;
 
         while (rollIndex < this.rolls.length && frameIndex < 10) {
-            const currentRoll = this.rolls[rollIndex];
-            const nextRoll = this.rolls[rollIndex + 1] ?? 0;
-            const secondNextRoll = this.rolls[rollIndex + 2];
-
-            if (this.isStrike(rollIndex)) {
-                score += 10 + nextRoll + secondNextRoll;
-                rollIndex += 1;
-            } else {
-                const frameScore = currentRoll + nextRoll;
-                if (this.isSpare(rollIndex)) {
-                    score += secondNextRoll;
-                }
-                score += frameScore;
-                rollIndex += 2;
-            }
-
+            const { frameScore, rollsInFrame } = this.calculateFrameScore(rollIndex);
+            score += frameScore;
+            rollIndex += rollsInFrame;
             frameIndex += 1;
         }
 
         return score;
+    }
+
+    private calculateFrameScore(rollIndex: number): { frameScore: number, rollsInFrame: number } {
+        const currentRoll = this.rolls[rollIndex];
+        const nextRoll = this.rolls[rollIndex + 1] ?? 0;
+        const secondNextRoll = this.rolls[rollIndex + 2];
+
+        if (this.isStrike(rollIndex)) {
+            return { frameScore: currentRoll + nextRoll + secondNextRoll, rollsInFrame: 1 }
+        } else {
+            const baseScore = currentRoll + nextRoll;
+            const bonusScore = this.isSpare(rollIndex) ? secondNextRoll : 0;
+
+            return { frameScore: baseScore + bonusScore, rollsInFrame: 2 }
+        }
     }
 
     private isStrike(rollIndex: number): boolean {
