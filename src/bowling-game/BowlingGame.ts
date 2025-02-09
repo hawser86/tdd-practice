@@ -23,7 +23,7 @@ export class BowlingGame {
     private calculateFrameScore(rollIndex: number): { frameScore: number, rollsInFrame: number } {
         const currentRoll = this.rolls[rollIndex];
         const nextRoll = this.rolls[rollIndex + 1] ?? 0;
-        const secondNextRoll = this.rolls[rollIndex + 2];
+        const secondNextRoll = this.rolls[rollIndex + 2] ?? 0;
 
         if (this.isStrike(rollIndex)) {
             return { frameScore: currentRoll + nextRoll + secondNextRoll, rollsInFrame: 1 }
