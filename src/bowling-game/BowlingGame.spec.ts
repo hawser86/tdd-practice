@@ -57,6 +57,16 @@ describe('BowlingGame', () => {
         expect(bowlingGame.getScore()).toEqual(24);
     });
 
+    it('should not add any bonus to the strike when the next rolls are not rolled yet', () => {
+        const bowlingGame = new BowlingGame();
+        rollFrame(bowlingGame, [3, 3]);
+        rollFrame(bowlingGame, [10]);
+        expect(bowlingGame.getScore()).toEqual(16);
+
+        rollFrame(bowlingGame, [3]);
+        expect(bowlingGame.getScore()).toEqual(22);
+    });
+
     it('should consider hitting 10 pins on the 2nd roll of a frame a spare', () => {
         const bowlingGame = new BowlingGame();
         rollFrame(bowlingGame, [0, 10]);
