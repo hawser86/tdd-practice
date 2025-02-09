@@ -37,4 +37,16 @@ describe('BowlingGame', () => {
 
         expect(bowlingGame.getScore()).toEqual(26);
     });
+
+    it('should not consider two consecutive rolls a spare if they are in different frames', () => {
+        const bowlingGame = new BowlingGame();
+
+        bowlingGame.roll(1);
+        bowlingGame.roll(7);
+
+        bowlingGame.roll(3);
+        bowlingGame.roll(5);
+
+        expect(bowlingGame.getScore()).toEqual(16);
+    });
 });
