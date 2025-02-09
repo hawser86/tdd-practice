@@ -57,6 +57,15 @@ describe('BowlingGame', () => {
 
         expect(bowlingGame.getScore()).toEqual(20);
     });
+
+    it('should calculate spare properly after a single-roll-frame with strike', () => {
+        const bowlingGame = new BowlingGame();
+        rollFrame(bowlingGame, [10]);
+        rollFrame(bowlingGame, [3, 7]);
+        rollFrame(bowlingGame, [1, 2]);
+
+        expect(bowlingGame.getScore()).toEqual(34);
+    });
 });
 
 const rollFrame = (bowlingGame: BowlingGame, pinCounts: number[]) => {
